@@ -24,3 +24,6 @@ phpdoc-*
 # Windows #
 Thumbs.db
 Desktop.ini
+
+!src/assets/css/bootstrap.min.css
+!src/assets/js/bootstrap.min.js
