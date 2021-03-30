@@ -4,6 +4,7 @@
 // extract from chromium source code by @liuwayong
 
 var is_user = false;
+var game_run = false;
 
 /**
  * T-Rex runner.
@@ -525,6 +526,7 @@ Runner.prototype = {
    * Update the game frame and schedules the next one.
    */
   update: function () {
+
     this.updatePending = false;
 
     var now = getTimeStamp();
@@ -679,6 +681,7 @@ Runner.prototype = {
 
       if (!this.crashed && (Runner.keycodes.JUMP[e.keyCode] ||
         e.type == Runner.events.TOUCHSTART)) {
+        game_run = true;
         if (!this.playing) {
           this.loadSounds();
           this.playing = true;
@@ -725,6 +728,7 @@ Runner.prototype = {
       e.type == Runner.events.MOUSEDOWN;
 
     if (this.isRunning() && isjumpKey) {
+      game_run = true;
       this.tRex.endJump();
     } else if (Runner.keycodes.DUCK[keyCode]) {
       this.tRex.speedDrop = false;
@@ -736,6 +740,7 @@ Runner.prototype = {
       if (Runner.keycodes.RESTART[keyCode] || this.isLeftClickOnCanvas(e) ||
         (deltaTime >= this.config.GAMEOVER_CLEAR_TIME &&
           Runner.keycodes.JUMP[keyCode])) {
+
         this.restart();
       }
     } else if (this.paused && isjumpKey) {
@@ -804,6 +809,21 @@ Runner.prototype = {
 
     // Reset the time clock.
     this.time = getTimeStamp();
+
+    game_run = false;
+
+    $.ajax({
+      type: 'POST',
+      url: host + '/records',
+      dataType: 'json',
+      data: {
+        access_token: user_data.access_token,
+        count: document.getElementById('ns_count').innerHTML
+      },
+      success: function (msg) {
+        document.getElementById('ns_count').innerHTML = '0';
+      }
+    });
   },
 
   stop: function () {
@@ -825,6 +845,7 @@ Runner.prototype = {
 
   restart: function () {
     if (!this.raqId) {
+      game_run = true;
       this.playCount++;
       this.runningTime = 0;
       this.playing = true;
@@ -963,6 +984,11 @@ function vibrate(duration) {
  * @return {HTMLCanvasElement}
  */
 function createCanvas(container, width, height, opt_classname) {
+  var cc = document.createElement('div');
+  cc.setAttribute('id', 'ns_count');
+  cc.innerHTML = '0';
+  container.appendChild(cc);
+
   var canvas = document.createElement('canvas');
   canvas.className = opt_classname ? Runner.classes.CANVAS + ' ' +
     opt_classname : Runner.classes.CANVAS;
@@ -1012,7 +1038,6 @@ function getTimeStamp() {
  * @constructor
  */
 function GameOverPanel(canvas, textImgPos, restartImgPos, dimensions) {
-  console.log( Runner );
   this.canvas = canvas;
   this.canvasCtx = canvas.getContext('2d');
   this.canvasDimensions = dimensions;

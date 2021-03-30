@@ -22,6 +22,8 @@ const createWindow = () => {
     title: 'Dino Runer',
   });
 
+  mainWindow.maximize();
+
   // Убирает стандартное меню
   mainWindow.setMenu(null);
 
@@ -29,7 +31,7 @@ const createWindow = () => {
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // Режим отладки
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {

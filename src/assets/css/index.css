@@ -8,6 +8,16 @@ html, body {
   overflow: hidden;
 }
 
+#ns_count {
+  position: absolute;
+  right: 0;
+  z-index: 1234;
+  background-color: #fff;
+  width: 200px;
+  text-align: right;
+  font-weight: 700;
+}
+
 .icon {
   -webkit-user-select: none;
   user-select: none;

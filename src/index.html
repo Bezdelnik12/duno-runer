@@ -18,17 +18,16 @@
 <div id="rs_login_form" class="login-page">
     <div class="form">
         <form id="rs_reg" class="register-form" onsubmit="reg();return false">
-            <input type="text" name="email" placeholder="email address"/>
-            <input type="text" name="login" placeholder="name"/>
-            <input type="password" name="password" placeholder="password"/>
+            <input type="text" name="login" placeholder="Логин"/>
+            <input type="password" name="password" placeholder="Пароль"/>
             <button type="submit">Зарегистрироватся</button>
-            <p class="message">Already registered? <a href="#" onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');return false;">Sign In</a></p>
+            <p class="message">Вы зарегистрированы? <a href="#" onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');return false;">Войти</a></p>
         </form>
         <form id="rs_login" class="login-form" onsubmit="auth();return false;">
             <input type="text" name="login" placeholder="Логин"/>
             <input type="password" name="password" placeholder="Пароль"/>
             <button type="submit">Войти</button>
-            <p class="message">Not registered? <a href="#" onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');return false;">Create an account</a></p>
+            <p class="message">Нет аккаунта? <a href="#" onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');return false;">Создать аккаунт</a></p>
         </form>
     </div>
 </div>
@@ -64,6 +63,11 @@
 </body>
 
 <script>
+    setInterval(function(){
+        if (is_user && game_run) {
+            document.getElementById('ns_count').innerHTML = Number.parseInt(document.getElementById('ns_count').innerHTML) + 1;
+        }
+    }, 100);
   setInterval(function(){
     if (!is_user) return;
     $.ajax({
