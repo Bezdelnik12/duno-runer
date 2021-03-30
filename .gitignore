@@ -1,2 +1,26 @@
-node_modules
+# IDE & System Related Files #
+.buildpath
+.project
+.settings
+.DS_Store
+.idea
+.vscode
+
+# Test Related Files #
+/phpunit.xml
+
+# Node modules #
+node_modules/
 out
+
+# phpDocumentor Logs #
+phpdoc-*
+
+# OSX #
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows #
+Thumbs.db
+Desktop.ini

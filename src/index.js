@@ -1,3 +1,4 @@
+jQuery(document).ready(function($){
 import { app, BrowserWindow } from 'electron';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -64,3 +65,22 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+$('.message a').click(function(){
+  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+
+  $.ajax( {
+    url        : 'http://localhost/api/reg',
+    method     : 'POST',
+    data       : {
+      'login' : 'user01',
+      'email': 'fddf',
+      'password': '1243'
+    }
+  } )
+      .done( function ( response ) {
+        console.log( response );
+      } );
+
+});
