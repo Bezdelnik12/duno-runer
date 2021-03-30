@@ -41,11 +41,10 @@ html, body {
   max-width: 600px;
   opacity: 1;
   overflow: hidden;
-  position: fixed;
+  position: absolute;
   top: 0;
   z-index: 2;
-  top: 50%;
-  margin-top: -70px;
+  margin-top: 30px;
 }
 
 .offline .runner-canvas {

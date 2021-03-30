@@ -1,35 +1,45 @@
-var host = 'https://nik.freeun.ru';
+var host = 'http://dino-server';
+var user_data = {
+    id: null,
+    access_token: null,
+    data: null
+};
 
-$(document).ready(function () {
-    var email = '';
-    $('#email').keyup(function () {
-        var value = $(this).val();
-        $.ajax({
-            type: 'POST',
-            url: 'email.php',
-            data: 'email=' + value,
-            success: function (msg) {
-                if (msg == 'valid') {
-                    $('#message').html('<font color="green">Этот Email можно использовать.</font>');
-                    email = value;
-                } else {
-                    $('message').html('<font color="red">Этот Email уже занят.</font>');
-                }
-            }
-        });
-    });
-    $('#submit').click(function () {
-        if (email == '') {
-            alert('Please, put data to all email');
-        } else {
-            $.ajax({
-                type: 'POST',
-                url: 'email.php',
-                data: 'add_email=' + email,
-                success: function (msg) {
-                    $('#message').html(msg);
-                }
-            });
+
+function auth() {
+    $.ajax({
+        type: 'POST',
+        url: host + '/login',
+        dataType: 'json',
+        data: $('#rs_login').serialize(),
+        success: function (msg) {
+            user_data.data = $('#rs_login').serialize();
+            user_data.access_token = msg.result.access_token;
+            user_data.id = msg.result.id;
+            is_user = true;
+            document.getElementById('rs_login_form').style.display = 'none';
+            document.getElementById('records_table').style.display = 'block';
+            document.getElementById('messageBox').style.visibility = 'visible';
+            document.body.style.background = '#fff';
         }
     });
-});
+}
+
+function reg() {
+    $.ajax({
+        type: 'POST',
+        url: host + '/reg',
+        dataType: 'json',
+        data: $('#rs_reg').serialize(),
+        success: function (msg) {
+            user_data.data = $('#rs_reg').serialize();
+            user_data.access_token = msg.result.access_token;
+            user_data.id = msg.result.id;
+            is_user = true;
+            document.getElementById('rs_login_form').style.display = 'none';
+            document.getElementById('records_table').style.display = 'block';
+            document.getElementById('messageBox').style.visibility = 'visible';
+            document.body.style.background = '#fff';
+        }
+    });
+}
