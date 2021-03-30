@@ -1,4 +1,4 @@
-var host = 'http://dino-server';
+var host = 'http://nik.freeun.ru';
 var user_data = {
     id: null,
     access_token: null,
