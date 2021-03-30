@@ -1,3 +1,5 @@
+var host = 'https://nik.freeun.ru';
+
 $(document).ready(function () {
     var email = '';
     $('#email').keyup(function () {
