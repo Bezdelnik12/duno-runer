@@ -1,5 +1,7 @@
-# Dino Runer
-Author: Шмелёв Никита
-Email: nik.shmelev.24@gmail.com
-License: GNU General Public License v2.0
-
+# Dino Runner
+Прикольная игрушка. Просто время провождения
+## Авторы
+* [Sergej Rufov](https://vk.com/rufow)
+* [Bezdelnik](https://vk.com/bezdelnik08)
+## Установка
+Просто скопируйте и запустите система сама установится
