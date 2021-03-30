@@ -1012,6 +1012,7 @@ function getTimeStamp() {
  * @constructor
  */
 function GameOverPanel(canvas, textImgPos, restartImgPos, dimensions) {
+  console.log( Runner );
   this.canvas = canvas;
   this.canvasCtx = canvas.getContext('2d');
   this.canvasDimensions = dimensions;

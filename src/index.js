@@ -1,4 +1,3 @@
-jQuery(document).ready(function($){
 import { app, BrowserWindow } from 'electron';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -14,11 +13,11 @@ const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 400,
+    height: 600,
     icon: __dirname + '/src/favicon.ico',
     center: true,
-    resizable: false,
-    fullscreenable: false,
+    //resizable: false,
+    fullscreenable: true,
     autoHideMenuBar: true,
     title: 'Dino Runer',
   });
@@ -30,7 +29,7 @@ const createWindow = () => {
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // Режим отладки
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
@@ -65,22 +64,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
-$('.message a').click(function(){
-  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
-
-  $.ajax( {
-    url        : 'http://localhost/api/reg',
-    method     : 'POST',
-    data       : {
-      'login' : 'user01',
-      'email': 'fddf',
-      'password': '1243'
-    }
-  } )
-      .done( function ( response ) {
-        console.log( response );
-      } );
-
-});

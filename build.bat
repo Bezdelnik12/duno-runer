@@ -1,1 +1,2 @@
-npm package
+electron-forge package
+rem npm package
