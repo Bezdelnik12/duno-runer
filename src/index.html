@@ -18,10 +18,6 @@
                 'img1': 'assets/images/type2/100-offline-sprite.png',
                 'img2': 'assets/images/type2/200-offline-sprite.png',
             },
-            {
-                'img1': 'assets/images/type3/100-offline-sprite.png',
-                'img2': 'assets/images/type3/200-offline-sprite.png',
-            },
         ];
     </script>
     <script src="assets/js/jquery-3.6.0.min.js"></script>
@@ -45,16 +41,21 @@
                 <label>Внешний вид</label>
                 <div class="col-md-12">
                     <select class="form-control" onchange="new_view(this.value)">
-                        <option value="0">Класический</option>
-                        <option value="1">1111</option>
-                        <option value="2">2222</option>
+                        <option value="0">Динозаврик</option>
+                        <option value="1">Волк</option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<style>
+    .btn-danger {
+        color: #fff;
+        background: #dc3545!important;
+        border-color: #dc3545;
+    }
+</style>
 <div id="rs_login_form" class="login-page">
     <div class="form">
         <form id="rs_reg" class="register-form" onsubmit="reg();return false">
@@ -66,8 +67,10 @@
         <form id="rs_login" class="login-form" onsubmit="auth();return false;">
             <input type="text" name="login" placeholder="Логин"/>
             <input type="password" name="password" placeholder="Пароль"/>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Настройки</button>
             <button type="submit">Войти</button>
+            <br />
+            <br />
+            <input type="button" class="btn btn-danger" onclick="window.close()" value="Выход" />
             <p class="message">Нет аккаунта? <a href="#" onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');return false;">Создать аккаунт</a></p>
         </form>
     </div>
@@ -89,7 +92,12 @@
             </template>
         </div>
     </div>
-    <div id="records_table" style="display: none">
+    <div id="records_table" class="text-center" style="display: none">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Настройки</button>
+
+        <button type="button" class="btn btn-danger" style="margin-right: 10px" onclick="logout()">Выход</button>
+        <br />
+        <br />
         <table class="table table-striped" style="width:512px;margin:0 auto">
             <tr>
                 <th>№</th>
@@ -105,6 +113,14 @@
     function new_view(type = 0) {
         document.getElementById('offline-resources-1x').setAttribute('src', img[type].img1);
         document.getElementById('offline-resources-2x').setAttribute('src', img[type].img2);
+    }
+
+    function logout() {
+        is_user = false;
+        document.getElementById('rs_login_form').style.display = 'block';
+        document.getElementById('records_table').style.display = 'none';
+        document.getElementById('messageBox').style.visibility = 'hidden';
+        document.body.style.background = '#76b852';
     }
 
     setInterval(function(){
