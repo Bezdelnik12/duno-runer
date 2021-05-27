@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <link href="assets/css/fonts.css" rel="stylesheet">
+    <script>
+        var img = [
+            {
+                'img1': 'assets/images/default_100_percent/100-offline-sprite.png',
+                'img2': 'assets/images/default_200_percent/200-offline-sprite.png',
+            },
+           {
+                'img1': 'assets/images/type2/100-offline-sprite.png',
+                'img2': 'assets/images/type2/200-offline-sprite.png',
+            },
+            {
+                'img1': 'assets/images/type3/100-offline-sprite.png',
+                'img2': 'assets/images/type3/200-offline-sprite.png',
+            },
+        ];
+    </script>
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/validate.js"></script>
@@ -15,6 +31,30 @@
 </head>
 
 <body id="t" class="offline">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Настройки</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Внешний вид</label>
+                <div class="col-md-12">
+                    <select class="form-control" onchange="new_view(this.value)">
+                        <option value="0">Класический</option>
+                        <option value="1">1111</option>
+                        <option value="2">2222</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="rs_login_form" class="login-page">
     <div class="form">
         <form id="rs_reg" class="register-form" onsubmit="reg();return false">
@@ -26,6 +66,7 @@
         <form id="rs_login" class="login-form" onsubmit="auth();return false;">
             <input type="text" name="login" placeholder="Логин"/>
             <input type="password" name="password" placeholder="Пароль"/>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Настройки</button>
             <button type="submit">Войти</button>
             <p class="message">Нет аккаунта? <a href="#" onclick="$('form').animate({height: 'toggle', opacity: 'toggle'}, 'slow');return false;">Создать аккаунт</a></p>
         </form>
@@ -60,9 +101,12 @@
             </tbody>
         </table>
     </div>
-</body>
-
 <script>
+    function new_view(type = 0) {
+        document.getElementById('offline-resources-1x').setAttribute('src', img[type].img1);
+        document.getElementById('offline-resources-2x').setAttribute('src', img[type].img2);
+    }
+
     setInterval(function(){
         if (is_user && game_run) {
             document.getElementById('ns_count').innerHTML = Number.parseInt(document.getElementById('ns_count').innerHTML) + 1;
@@ -99,5 +143,5 @@
     }
 };
 </script>
-
+</body>
 </html>
